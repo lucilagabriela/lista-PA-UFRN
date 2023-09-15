@@ -2,51 +2,57 @@
 // soma_vetores(vet1, vet2, resultado, 4);
 
 void somaVetores(int *vetor1, int *vetor2, int *vetorSoma, int tamanhoVetor) {
-    int j;
-    for (j = 0; j < tamanhoVetor; j++) {
-        vetorSoma[j] = vetor1[j] + vetor2[j];
+    int i;
+    for (i = 0; i < tamanhoVetor; i++) {
+        vetorSoma[i] = vetor1[i] + vetor2[i];
     }
 }
 
-int main(void) {
-    int tamanhoVetor, i;
-    int vetor1[tamanhoVetor];
-    int vetor2[tamanhoVetor];
-    int vetorSoma[tamanhoVetor]; // criacao de vetores
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+    int tamVetor = 0;
+    int i = 0;
+    
+    int vetorSoma[tamVetor]; // criacao de vetores
 
     printf("Digite o tamanho dos vetores: ");
-    scanf("%d", &tamanhoVetor); // guardar o tamanho do vetor no endereço da variável tamanhoVetor
-
-    if (tamanhoVetor <= 0) {
+    scanf("%d", &tamVetor); // guardar o tamanho do vetor no endereço da variável tamanhoVetor
+    
+    if (tamVetor <= 0) {
         printf("Tamanho invalido");
     }
+    
+    int vetor1[tamVetor];
+    int vetor2[tamVetor];
 
     // estrutura de repeticao para pegar, do usuario, os valores do vetor 1
-    for (i = 0; i < tamanhoVetor; i++) {
+    for (i = 0; i < tamVetor; i++) {
         printf("Digite o %d elemento do vetor 1: ", i+1);
         scanf("%d", &vetor1[i]); // guardar os valores no vetor 1
     }
     // estrutura de repeticao para pegar, do usuario, os valores do vetor 2
     printf("Digite os elementos do vetor 2:");
-    for (i = 0; i < tamanhoVetor; i++) {
+    for (i = 0; i < tamVetor; i++) {
         scanf("%d", &vetor2[i]); // guardar os valores no vetor 1
     }
     // estrutura de repeticao para mostrar os valores do vetor 1
-    for (i = 0; i < tamanhoVetor; i++) {
+    for (i = 0; i < tamVetor; i++) {
         printf("O %d elemento do vetor 1: %d\n", i+1, vetor1[i]);
     }
 
     // estrutura de repeticao para mostrar os valores do vetor 2
-    for (i = 0; i < tamanhoVetor; i++) {
+    for (i = 0; i < tamVetor; i++) {
         printf("O %d elemento do vetor 2: %d\n", i+1, vetor2[i]);
     }
 
-    somaVetores(vetor1, vetor2, vetorSoma, tamanhoVetor);
+    somaVetores(vetor1, vetor2, vetorSoma, tamVetor);
 
-/*
     // estrutura de repeticao para mostrar os valores do vetor soma
-    for (i = 0; i < tamanhoVetor; i++) {
+    for (i = 0; i < tamVetor; i++) {
         printf("O %d elemento do vetor soma: %d\n", i+1, vetorSoma[i]);
     }
-*/
+
+    return 0;
 }
