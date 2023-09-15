@@ -1,58 +1,49 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <stdio.h>
+#include <time.h> // para medir o tempo de execução do programa
 
-int cmp(const void *a, const void *b) {
-    float *x = (float *)a;
-    float *y = (float *)b;
-    if (*x < *y) {
-        return -1;
-    } else if (*x > *y) {
-        return 1;
-    } else {
-        return 0;
-    }
+int comparar(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
 }
 
-int main() {
+int main(void) {
     int n, i;
-    float *vet;
-    clock_t t_inicio, t_fim;
-    double tempo_execucao;
+    // alocacao de memoria para n valores do tipo int
+    int *valores = (int *)malloc(n * sizeof(int));
 
-    printf("Digite o numero de elementos: ");
+    printf("Digite a quantidade de valores que voce deseja ordenar: ");
     scanf("%d", &n);
 
-    vet = (float*)malloc(n * sizeof(float));
+    if (n <= 0) { // testar se o numero de valores é valido
+        printf("O numero de valores deve ser maior que zero.");
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("Digite o valor: ");
+        scanf("%d", &valores[i]);
+    }
+
+    // medir o tempo de execução usando clock_t
+    //clock_t inicio = clock();
+
+    time_t begin = time(NULL);
+
+    // ordenar os valores, usando qsort:
+    qsort(valores, n, sizeof(int), comparar);
+
+    time_t end = time(NULL);
     
-    printf("Digite os elementos:\n");
-    for (i = 0; i < n; i++) {
-        scanf("%f", &vet[i]);
+    //clock_t fim = clock();
+    //double tempo_execucao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+
+    printf("Valores ordenados de forma crescente:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d\n", valores[i]);
     }
 
-     t_inicio = clock();
+    printf("Tempo de execucao: %.6f segundos.", (end - begin));
 
-    qsort(vet, n, sizeof(float), cmp);
+    // liberar a memória alocada dinamicamente
+    free(valores);
 
-    t_fim = clock();
-
-    tempo_execucao = (double)(t_fim - t_inicio) / CLOCKS_PER_SEC;
-
-    printf("Os elementos, em ordem crescente, sao:\n");
-    for (i = 0; i < n; i++) {
-        printf("%f ", vet[i]);
-    }
-
-    printf("\nTempo de execucao, em %lf segundos: \n", tempo_execucao);
-
-
-    free(vet);
-
-    return 0;
 }
-
-
-
-
-
-

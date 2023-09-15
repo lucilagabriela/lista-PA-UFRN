@@ -1,43 +1,39 @@
+// Implemente em linguagem C uma função em um programa de computador que leia n valores do tipo float e os apresente em ordem crescente. Utilize alocação dinâmica de memória para realizar a tarefa.
+
 #include <stdlib.h>
 #include <stdio.h>
 
-int ordenacao(float *vet, int n) {
-    int i, j;
-    float aux;
-
-    for (i = 1; i < n; i ++) {
-        aux = vet[i];
-        j = i - 1;
-
-        while (j >= 0 && vet[j] > aux) {
-            vet[j+1] = vet[j];
-            j--;
-        }
-    }
-}
-
 int main(void) {
+    int i, j, n, valor;
+    int *valores = (int *)malloc(n * sizeof(int));
 
-    int n, i;
-    float *vet;
-
-    printf("Digite o numero de elementos: ");
+    printf("Digite a quantidade de valores que voce deseja ordenar: ");
     scanf("%d", &n);
 
-    vet = (float*)malloc(n * sizeof(float));
-
-    printf("Digite os elementos: \n");
-    
-    for (i = 0; i < n; i++) {
-        scanf("%f", &vet[i]);
+    if (n <= 0) { // testar se o numero de valores é valido
+        printf("O numero de valores deve ser maior que zero.");
     }
 
-    ordenacao(vet, n);
-
-    printf("Os elementos, em ordem crescente, sao: \n");
     for (i = 0; i < n; i++) {
-        printf("%f ", vet[i]);
+        printf("Digite o valor: ");
+        scanf("%d", &valores[i]);
     }
 
-    free(vet);
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (valores[i] > valores[j]) {
+                int temp = valores[i];
+                valores[i] = valores[j];
+                valores[j] = temp;
+            }
+        }
+    }
+
+    printf("Valores ordenados de forma crescente:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d\n", valores[i]);
+    }
+
+    free(valores);
+
 }
