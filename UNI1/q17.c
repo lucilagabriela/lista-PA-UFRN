@@ -10,7 +10,9 @@ void somaVetores(int *vetor1, int *vetor2, int *vetorSoma, int tamanhoVetor) {
 
 int main(void) {
     int tamanhoVetor, i;
-    int vetor1[tamanhoVetor], vetor2[tamanhoVetor], vetorSoma[tamanhoVetor]; // criacao de vetores
+    int vetor1[tamanhoVetor];
+    int vetor2[tamanhoVetor];
+    int vetorSoma[tamanhoVetor]; // criacao de vetores
 
     printf("Digite o tamanho dos vetores: ");
     scanf("%d", &tamanhoVetor); // guardar o tamanho do vetor no endereço da variável tamanhoVetor
@@ -38,6 +40,9 @@ int main(void) {
     for (i = 0; i < tamanhoVetor; i++) {
         printf("O %d elemento do vetor 2: %d\n", i+1, vetor2[i]);
     }
+
+    somaVetores(vetor1, vetor2, vetorSoma, tamanhoVetor);
+
 /*
     // estrutura de repeticao para mostrar os valores do vetor soma
     for (i = 0; i < tamanhoVetor; i++) {
