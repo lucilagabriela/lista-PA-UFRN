@@ -9,27 +9,83 @@ void multiplicacaoMatrizes(int **A, int **B, int **C, int linhasA, int colunasB)
 }
 
 int main(void) {
-    int linhasA, colunasA, linhasB, colunasB, j;
+    int linhasA, colunasA, linhasB, colunasB, i, j, x;
+    float matrizA[linhasA][colunasA], matrizB[linhasB][colunasB], matrizC[linhasA][colunasB];
+    float aux = 0;
 
-    printf("Digite o número de linhas da matriz A: ");
+    printf("Informe a quantidade de linhas da matriz A: ");
     scanf("%d", &linhasA);
-    printf("Digite o número de colunas de A: ");
+    printf("Informe a quantidade de colunas da matriz A: ");
     scanf("%d", &colunasA);
-    printf("Digite o número de linhas da matriz A: ");
+    printf("Informe a quantidade de linhas da matriz A: ");
     scanf("%d", &linhasB);
-    printf("Digite o número de colunas de B: ");
+    printf("Informe a quantidade de colunas da matriz B: ");
     scanf("%d", &colunasB);
 
     if (colunasA != linhasB) { // na questao fala que o numero de colunas de A deve ser igual ao numero de linhas de B
-        printf("O numero de colunas de A deve ser igual ao numero de linhas de B.\n");
-        return 1;
+        printf("Nao eh possivel multiplicar as duas matrizes. O numero de colunas de A deve ser igual ao numero de linhas de B.\n");
     }
 
+    for (i = 0; i < linhasA; i++) {
+        for (j = 0; j < colunasA; j++) {
+            printf("Digite o elemento [%d] [%d] da primeira matriz:");
+            scanf("%f", &matrizA[i][j]);
+        }
+    }
+
+    for (i = 0; i < linhasB; i++) {
+        for (j = 0; j < colunasB; j++) {
+            printf("Digite o elemento [%d] [%d] da segunda matriz:");
+            scanf("%f", &matrizB[i][j]);
+        }
+    }
+
+    // imprimindo as matrizes:
+    printf("Matriz A:");
+    for(i = 0; i < linhasA; i++) {        
+		for(j = 0; j < colunasA; j++) {
+			printf("%6.f", matrizA[i][j]);
+		}
+		printf("\n\n");
+	}
+
+    printf("Matriz B:");
+    for(i = 0; i < linhasB; i++) {
+		for(j = 0; j < colunasB; j++) {
+			printf("%6.f", matrizB[i][j]); 
+		}
+		printf("\n\n");
+	}
+
+    for(i = 0; i < linhasA; i++) {
+		for(j = 0; j < colunasB; j++) {
+			
+			matrizC[i][j] = 0;
+			for(x = 0; x < linhasB; x++) {
+				aux +=  matrizA[i][x] * matrizB[x][j];
+			}
+
+			matrizC[i][j] = aux;
+			aux = 0;
+		}
+	}
+	
+	for(i = 0; i < linhasA; i++) {
+		for(j = 0; j < colunasB; j++) {
+			printf("%6.f", matrizC[i][j]);
+		}
+		printf("\n\n");
+	}
+	printf("\n\n");
+
+}
+
+/*
     int **A = (int **)malloc(linhasA * sizeof(int));
     int **B = (int **)malloc(linhasB * sizeof(int));
     int **C = (int **)malloc(linhasA * sizeof(int));
 
-    for (int i = 0; i < linhasA; i++) {
+    for (i = 0; i < linhasA; i++) {
         A[i] = malloc(colunasA * sizeof(int));
         for (j = 0; j < colunasA; j++) {
             printf("Digite o elemento [%d] [%d] da primeira matriz:");
@@ -44,6 +100,4 @@ int main(void) {
             scanf("%d", &B[i][j]);
         }
     }
-
-    
-}
+*/
